@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [charCount, setCharCount] = useState('');
   const [timeRemaining, setTimeRemaining] = useState(5);
+  const [isTimeRunning, setIsTimeRunning] = useState(false);
 
   function handleCharChange(e) {
     const {value} = e.target;
@@ -16,12 +17,14 @@ function App() {
   }
 
   useEffect(() => {
-    if(timeRemaining >= 1) {
+    if(isTimeRunning && timeRemaining > 0) {
       setTimeout(() => {
         setTimeRemaining(prevTime => prevTime - 1)
       }, 1000)
+    } else if(timeRemaining === 0) {
+      setIsTimeRunning(false);
     }
-  },[timeRemaining]);
+  },[timeRemaining, isTimeRunning]);
 
   return (
     <div>
@@ -31,7 +34,7 @@ function App() {
         value={charCount}
       />
       <h4>Time Remaining: {timeRemaining}</h4>
-      <button>Start game</button>
+      <button onClick={() => {setIsTimeRunning(true)}}>Start game</button>
       <h1>You typed x words</h1>
     </div>
   );
