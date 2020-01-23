@@ -9,6 +9,11 @@ function App() {
     setCharCount(value)
   }
 
+  function calculateWordCount(string) {
+    const wordsArr = string.trim().split(" ");
+    return wordsArr.filter(word => word !== "").length
+  }
+
   return (
     <div>
       <h1>Speed Typing Game</h1>
