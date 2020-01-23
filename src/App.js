@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 function App() {
   const [charCount, setCharCount] = useState('');
+  const [timeRemaining, setTimeRemaining] = useState(5);
 
   function handleCharChange(e) {
     const {value} = e.target;
@@ -14,6 +15,14 @@ function App() {
     return wordsArr.filter(word => word !== "").length
   }
 
+  useEffect(() => {
+    if(timeRemaining >= 1) {
+      setTimeout(() => {
+        setTimeRemaining(prevTime => prevTime - 1)
+      }, 1000)
+    }
+  },[timeRemaining]);
+
   return (
     <div>
       <h1>Speed Typing Game</h1>
@@ -21,7 +30,7 @@ function App() {
         onChange={handleCharChange}
         value={charCount}
       />
-      <h4>Time Remaining</h4>
+      <h4>Time Remaining: {timeRemaining}</h4>
       <button>Start game</button>
       <h1>You typed x words</h1>
     </div>
