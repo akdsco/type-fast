@@ -2,6 +2,8 @@
 
 # personal preference
 /.idea/
+.firebase/
+.firebaserc
 
 # dependencies
 /node_modules
